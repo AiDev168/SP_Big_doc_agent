@@ -41,3 +41,14 @@
 - New LLM provider preset: `core/constants.py`
 - New retrieval stage: `core/retrieval.py`
 - New page: add `ui/pages/<name>.py` and route it in `ui/main.py`
+
+## Package smoke test
+
+From the repository root, verify that the reusable package can be imported without importing optional ML/OCR dependencies:
+
+```powershell
+python -B -S -m unittest discover -s tests -v
+python -B -S -c "import localrag; from localrag.core import network; print(localrag.__file__)"
+```
+
+The `-S` flag intentionally skips site packages for this smoke test. It verifies the local package layout only; it does not test Streamlit startup or optional document/LLM dependencies.
